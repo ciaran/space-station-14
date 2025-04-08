@@ -5,7 +5,9 @@ using Content.Shared.CombatMode;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
+using Robust.Client.Utility;
 using Robust.Shared.Configuration;
+using Steamworks;
 
 namespace Content.Client.CombatMode;
 
@@ -16,6 +18,7 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
+    [Dependency] private readonly ISteamManager _steam = default!;
 
     /// <summary>
     /// Raised whenever combat mode changes.
@@ -85,10 +88,14 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
                 _eye,
                 this,
                 EntityManager.System<HandsSystem>()));
+
+            _steam.SetTimelineTooltip("Combat Mode Enabled", 0);
         }
         else
         {
             _overlayManager.RemoveOverlay<CombatModeIndicatorsOverlay>();
+
+            _steam.SetTimelineTooltip("Combat Mode Disabled", 0);
         }
     }
 }
