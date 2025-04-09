@@ -76,6 +76,16 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
 
         var inCombatMode = IsInCombatMode();
         LocalPlayerCombatModeUpdated?.Invoke(inCombatMode);
+
+        // if (inCombatMode)
+        // {
+        //     _steam.SetTimelineTooltip("Combat Mode Enabled", 0);
+        // }
+        // else
+        // {
+        //
+        //     _steam.SetTimelineTooltip("Combat Mode Disabled", 0);
+        // }
     }
 
     private void OnShowCombatIndicatorsChanged(bool isShow)
@@ -88,14 +98,10 @@ public sealed class CombatModeSystem : SharedCombatModeSystem
                 _eye,
                 this,
                 EntityManager.System<HandsSystem>()));
-
-            _steam.SetTimelineTooltip("Combat Mode Enabled", 0);
         }
         else
         {
             _overlayManager.RemoveOverlay<CombatModeIndicatorsOverlay>();
-
-            _steam.SetTimelineTooltip("Combat Mode Disabled", 0);
         }
     }
 }

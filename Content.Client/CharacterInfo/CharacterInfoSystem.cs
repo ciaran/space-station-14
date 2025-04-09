@@ -33,6 +33,7 @@ public sealed class CharacterInfoSystem : EntitySystem
     {
         var entity = GetEntity(msg.NetEntity);
         var data = new CharacterData(entity, msg.JobTitle, msg.Objectives, msg.Briefing, Name(entity));
+        Log.Warning($"data: {data}");
 
         OnCharacterUpdate?.Invoke(data);
     }
